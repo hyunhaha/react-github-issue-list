@@ -1,34 +1,19 @@
 import "./App.css";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { GlobalStyle } from "./styles/globalStyle";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import IssueList from "./Comoponents/IssueList";
+import { fetchData } from "./api";
+import useIssueFetch from "./useIssueFetch";
 
 function App() {
-  const [issues, setIssues] = useState([]);
-  useEffect(() => {
-    let myHeaders = new Headers();
+  const state = useIssueFetch(fetchData, []);
+  const { loading, data: issues, error } = state;
 
-    let requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    fetch(
-      "https://api.github.com/repos/facebook/create-react-app/issues",
-      requestOptions
-    )
-      .then(response => response.json())
-      .then(result => {
-        console.log(result);
-        const sortedArr = result.sort((a, b) => b.comments - a.comments);
-        setIssues(sortedArr);
-      })
-      .catch(error => console.log("error", error));
-  }, []);
+  if (loading) return <div>Loading..</div>;
+  if (error) return <div>Error!</div>;
+  if (!issues) return null;
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
