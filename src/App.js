@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { GlobalStyle } from "./styles/globalStyle";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
-import IssueList from "./Comoponents/IssueList";
+import IssueList from "./Components/IssueList";
 import { fetchData } from "./api";
 import useIssueFetch from "./useIssueFetch";
 
