@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { dateForm } from "../utils/date";
 
 const Issue = ({ data }) => {
   return (
@@ -13,7 +14,9 @@ const Issue = ({ data }) => {
           ))}
         </span>
 
-        <Info>{`#${data.number} ${data.state} ${data.created_at} by ${data.user.login}`}</Info>
+        <Info>{`#${data.number} ${data.state} ${dateForm(data.created_at)} by ${
+          data.user.login
+        }`}</Info>
       </Content>
       <div>{`comment${data.comments}`}</div>
     </Item>
