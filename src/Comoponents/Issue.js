@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { dateForm } from "../utils/date";
+import { BiComment } from "react-icons/bi";
 
 const Issue = ({ data }) => {
   return (
@@ -18,7 +19,12 @@ const Issue = ({ data }) => {
           data.user.login
         }`}</Info>
       </Content>
-      <div>{`comment${data.comments}`}</div>
+      {data.comments > 0 && (
+        <Comment href={data.html_url}>
+          <BiComment />
+          <CommentCount>{data.comments}</CommentCount>
+        </Comment>
+      )}
     </Item>
   );
 };
@@ -27,21 +33,26 @@ const Item = styled.li`
   justify-content: space-between;
   text-align: left;
   border-bottom: 1px solid ${props => props.theme.color.lightGray1};
-  padding: 8px;
+  padding: 8px 16px;
   &:last-child {
     border-bottom: none;
   }
+  &:hover {
+    background-color: ${props => props.theme.color.lightGray3};
+  }
 `;
 
-const Content = styled.div``;
+const Content = styled.div`
+  width: 88%;
+`;
 const Title = styled.a`
   font-weight: 600;
   font-size: 16px;
   line-height: 1.5;
   text-decoration: none;
-  color: black;
+  color: ${props => props.theme.color.black};
   &:hover {
-    color: blue;
+    color: ${props => props.theme.color.purple};
   }
 `;
 const Info = styled.div`
@@ -58,5 +69,21 @@ const Label = styled.span`
   border: 1px solid transparent;
   border-radius: 2em;
   margin-left: 4px;
+`;
+const Comment = styled.a`
+  width: 12%;
+  padding-top:2px;
+  text-align: right;  
+  text-decoration: none;
+  color: ${props => props.theme.color.black};
+  &:hover {
+    color: ${props => props.theme.color.purple};
+  }
+}
+`;
+const CommentCount = styled.span`
+  padding-left: 4px;
+  vertical-align: middle;
+  text-align: right;
 `;
 export default Issue;
