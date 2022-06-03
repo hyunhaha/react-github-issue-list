@@ -10,7 +10,10 @@ import useIssueFetch from "./hooks/useIssueFetch";
 function App() {
   const state = useIssueFetch(fetchData, []);
   const { loading, data: issues, error } = state;
-
+  const sortData = data => {
+    const sortedData = data.sort((a, b) => b.comments - a.comments);
+    return sortedData;
+  };
   if (loading) return <div>Loading..</div>;
   if (error) return <div>Error!</div>;
   if (!issues) return null;
@@ -18,7 +21,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Layout className="App">
-        <IssueList issues={issues} />
+        <IssueList issues={sortData(issues)} />
       </Layout>
     </ThemeProvider>
   );
