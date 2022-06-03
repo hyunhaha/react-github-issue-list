@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import IssueList from "./Components/IssueList";
 import { fetchData } from "./api";
-import useIssueFetch from "./useIssueFetch";
+import useIssueFetch from "./hooks/useIssueFetch";
 
 function App() {
   const state = useIssueFetch(fetchData, []);

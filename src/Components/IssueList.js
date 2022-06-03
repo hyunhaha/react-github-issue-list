@@ -5,7 +5,7 @@ import Issue from "./Issue";
 const IssueList = ({ issues }) => (
   <List>
     {issues.map((issue, i) => (
-      <Issue data={issue} />
+      <Issue key={issue.id} data={issue} />
     ))}
   </List>
 );
