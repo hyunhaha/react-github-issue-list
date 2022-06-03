@@ -1,10 +1,9 @@
-import "./App.css";
 import styled from "styled-components";
 import { GlobalStyle } from "./styles/globalStyle";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import IssueList from "./Components/IssueList";
-import { fetchData } from "./api";
+import { fetchData } from "./api/api";
 import useIssueFetch from "./hooks/useIssueFetch";
 
 function App() {
